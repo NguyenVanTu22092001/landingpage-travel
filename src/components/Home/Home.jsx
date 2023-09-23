@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./home.css";
 import video from "../../Assets/video.mp4";
 import { GrLocation } from "react-icons/gr";
@@ -18,6 +18,12 @@ export const Home = () => {
     Aos.init({ duration: 2000 });
   }, []);
 
+  const [price, setPrice] = useState(100);
+
+  const handlePriceChange = (e) => {
+    const newValue = parseInt(e.target.value, 10);
+    setPrice(newValue);
+  };
   return (
     <section className="home">
       <div className="overlay"></div>
@@ -52,14 +58,19 @@ export const Home = () => {
 
           <div className="priceInput">
             <div className="label_total flex">
-              <label htmlFor="price">Max Price:</label>
-              <h3 className="total">$5000</h3>
+              <label htmlFor="price">Price:</label>
+              <h3 className="total">${price}</h3>
             </div>
             <div className="input flex">
-              <input type="range" max="5000" min="1000" />
+              <input
+                type="range"
+                max="5000"
+                min="100"
+                value={price}
+                onChange={handlePriceChange}
+              />
             </div>
           </div>
-
           {/* <div className="searchOptions flex">
             <HiFilter className='icon' />
             <span>MORE FILTERS</span>
